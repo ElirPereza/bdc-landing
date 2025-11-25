@@ -1,4 +1,5 @@
 import { Header, Hero, ProductGrid, Footer } from "@/components/gallery"
+import { WhatsAppButton } from "@/components/whatsapp-button"
 
 export default function Home() {
   const repuestos = [
@@ -88,6 +89,7 @@ export default function Home() {
         <ProductGrid id="motocargueros" title="Motocargueros" products={motocargueros} />
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   )
 }
