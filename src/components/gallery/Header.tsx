@@ -70,7 +70,7 @@ export function Header() {
             <Link href="/dashboard">
               <Button
                 variant="outline"
-                className={`ml-2 ${isScrolled ? 'border-border text-foreground hover:bg-muted hover:text-foreground' : 'border-white text-white hover:bg-white hover:text-black'}`}
+                className={`ml-2 ${isScrolled ? 'border-primary text-primary hover:bg-primary hover:text-primary-foreground' : 'border-white/30 text-white hover:bg-white/10'}`}
               >
                 Admin
               </Button>
