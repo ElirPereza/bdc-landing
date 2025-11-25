@@ -46,8 +46,8 @@ export function Header() {
             <Image
               src="/assets/logo-bdc.png"
               alt="BDC Logo"
-              width={40}
-              height={40}
+              width={70}
+              height={70}
               className="rounded-lg"
             />
             <span className={`font-semibold text-xl tracking-tight transition-colors ${isScrolled ? 'text-foreground' : 'text-white'}`}>
