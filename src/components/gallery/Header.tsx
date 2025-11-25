@@ -42,17 +42,14 @@ export function Header() {
     >
       <nav className="container mx-auto px-4 lg:px-8 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center">
             <Image
               src="/assets/logo-bdc.png"
               alt="BDC Logo"
-              width={70}
-              height={70}
+              width={120}
+              height={120}
               className="rounded-lg"
             />
-            <span className={`font-semibold text-xl tracking-tight transition-colors ${isScrolled ? 'text-foreground' : 'text-white'}`}>
-              BDC
-            </span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-1">

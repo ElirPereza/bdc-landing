@@ -8,15 +8,14 @@ export function Footer() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <div className="flex items-center space-x-3 mb-4">
+            <div className="flex items-center mb-4">
               <Image
                 src="/assets/logo-bdc.png"
                 alt="BDC Logo"
-                width={40}
-                height={40}
+                width={120}
+                height={120}
                 className="rounded-lg"
               />
-              <span className="font-semibold text-xl text-foreground">BDC</span>
             </div>
             <p className="text-muted-foreground text-sm">
               Tu destino premium para repuestos y motocargueros de calidad.
