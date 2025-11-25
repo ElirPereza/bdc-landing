@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Twitter } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -8,10 +9,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">M</span>
-              </div>
-              <span className="font-semibold text-xl text-foreground">MotoGallery</span>
+              <Image
+                src="/assets/logo-bdc.png"
+                alt="BDC Logo"
+                width={40}
+                height={40}
+                className="rounded-lg"
+              />
+              <span className="font-semibold text-xl text-foreground">BDC</span>
             </div>
             <p className="text-muted-foreground text-sm">
               Tu destino premium para repuestos y motocargueros de calidad.
@@ -74,7 +79,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-            <p>© 2024 MotoGallery. Todos los derechos reservados.</p>
+            <p>© 2024 BDC. Todos los derechos reservados.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="hover:text-primary transition-colors">
                 Privacidad

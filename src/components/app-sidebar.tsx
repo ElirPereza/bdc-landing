@@ -23,11 +23,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import Image from "next/image"
 
 const data = {
   user: {
     name: "Admin",
-    email: "admin@motogallery.com",
+    email: "admin@bdc.com",
     avatar: "",
   },
   navMain: [
@@ -82,10 +83,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="/dashboard">
-                <div className="w-6 h-6 bg-primary rounded flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">M</span>
-                </div>
-                <span className="text-base font-semibold">MotoGallery</span>
+                <Image
+                  src="/assets/logo-bdc.png"
+                  alt="BDC Logo"
+                  width={24}
+                  height={24}
+                  className="rounded"
+                />
+                <span className="text-base font-semibold">BDC</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

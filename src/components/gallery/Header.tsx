@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Menu } from "lucide-react"
+import Image from "next/image"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -42,11 +43,15 @@ export function Header() {
       <nav className="container mx-auto px-4 lg:px-8 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">M</span>
-            </div>
+            <Image
+              src="/assets/logo-bdc.png"
+              alt="BDC Logo"
+              width={40}
+              height={40}
+              className="rounded-lg"
+            />
             <span className={`font-semibold text-xl tracking-tight transition-colors ${isScrolled ? 'text-foreground' : 'text-white'}`}>
-              MotoGallery
+              BDC
             </span>
           </Link>
 

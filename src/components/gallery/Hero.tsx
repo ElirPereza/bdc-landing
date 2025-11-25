@@ -23,8 +23,8 @@ export function Hero() {
     <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-workshop.jpg"
-          alt="Taller de reparación de motocargueros"
+          src="/assets/banner-1.jpg"
+          alt="BDC Motocargueros"
           fill
           className="object-cover"
           priority
