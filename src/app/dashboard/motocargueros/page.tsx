@@ -29,14 +29,14 @@ import { IconPlus, IconTrash, IconEdit, IconUpload } from "@tabler/icons-react"
 import { useState } from "react"
 import Image from "next/image"
 
-interface Moto {
+interface Motocarguero {
   id: number
   name: string
   description: string
   image: string
 }
 
-const initialMotos: Moto[] = [
+const initialMotocargueros: Motocarguero[] = [
   {
     id: 1,
     name: "Sport 1000R",
@@ -75,10 +75,10 @@ const initialMotos: Moto[] = [
   },
 ]
 
-export default function MotosPage() {
-  const [motos, setMotos] = useState<Moto[]>(initialMotos)
+export default function MotocargueroPage() {
+  const [motocargueros, setMotocargueros] = useState<Motocarguero[]>(initialMotocargueros)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingMoto, setEditingMoto] = useState<Moto | null>(null)
+  const [editingMotocarguero, setEditingMotocarguero] = useState<Motocarguero | null>(null)
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -87,39 +87,39 @@ export default function MotosPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (editingMoto) {
-      setMotos(motos.map(m =>
-        m.id === editingMoto.id
+    if (editingMotocarguero) {
+      setMotocargueros(motocargueros.map(m =>
+        m.id === editingMotocarguero.id
           ? { ...m, ...formData }
           : m
       ))
     } else {
-      const newMoto: Moto = {
-        id: Math.max(...motos.map(m => m.id)) + 1,
+      const newMotocarguero: Motocarguero = {
+        id: Math.max(...motocargueros.map(m => m.id)) + 1,
         ...formData,
       }
-      setMotos([...motos, newMoto])
+      setMotocargueros([...motocargueros, newMotocarguero])
     }
     resetForm()
   }
 
-  const handleEdit = (moto: Moto) => {
-    setEditingMoto(moto)
+  const handleEdit = (motocarguero: Motocarguero) => {
+    setEditingMotocarguero(motocarguero)
     setFormData({
-      name: moto.name,
-      description: moto.description,
-      image: moto.image,
+      name: motocarguero.name,
+      description: motocarguero.description,
+      image: motocarguero.image,
     })
     setIsDialogOpen(true)
   }
 
   const handleDelete = (id: number) => {
-    setMotos(motos.filter(m => m.id !== id))
+    setMotocargueros(motocargueros.filter(m => m.id !== id))
   }
 
   const resetForm = () => {
     setFormData({ name: "", description: "", image: "" })
-    setEditingMoto(null)
+    setEditingMotocarguero(null)
     setIsDialogOpen(false)
   }
 
@@ -138,20 +138,20 @@ export default function MotosPage() {
         <div className="flex flex-1 flex-col p-4 lg:p-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-2xl font-bold text-foreground">Motocicletas</h1>
-              <p className="text-muted-foreground text-sm">Gestiona las motocicletas de tu catálogo</p>
+              <h1 className="text-2xl font-bold text-foreground">Motocargueros</h1>
+              <p className="text-muted-foreground text-sm">Gestiona los motocargueros de tu catálogo</p>
             </div>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button onClick={() => { resetForm(); setIsDialogOpen(true); }}>
                   <IconPlus className="h-4 w-4 mr-2" />
-                  Agregar Moto
+                  Agregar Motocarguero
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>
-                    {editingMoto ? "Editar Motocicleta" : "Nueva Motocicleta"}
+                    {editingMotocarguero ? "Editar Motocarguero" : "Nuevo Motocarguero"}
                   </DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -161,7 +161,7 @@ export default function MotosPage() {
                       id="name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Nombre de la moto"
+                      placeholder="Nombre del motocarguero"
                       required
                     />
                   </div>
@@ -198,7 +198,7 @@ export default function MotosPage() {
                       Cancelar
                     </Button>
                     <Button type="submit">
-                      {editingMoto ? "Guardar" : "Crear"}
+                      {editingMotocarguero ? "Guardar" : "Crear"}
                     </Button>
                   </div>
                 </form>
@@ -208,7 +208,7 @@ export default function MotosPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Lista de Motocicletas</CardTitle>
+              <CardTitle className="text-lg">Lista de Motocargueros</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
@@ -221,35 +221,35 @@ export default function MotosPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {motos.map((moto) => (
-                    <TableRow key={moto.id}>
+                  {motocargueros.map((motocarguero) => (
+                    <TableRow key={motocarguero.id}>
                       <TableCell>
                         <div className="relative w-12 h-12 rounded overflow-hidden bg-muted">
                           <Image
-                            src={moto.image}
-                            alt={moto.name}
+                            src={motocarguero.image}
+                            alt={motocarguero.name}
                             fill
                             className="object-cover"
                           />
                         </div>
                       </TableCell>
-                      <TableCell className="font-medium">{moto.name}</TableCell>
+                      <TableCell className="font-medium">{motocarguero.name}</TableCell>
                       <TableCell className="text-muted-foreground text-sm">
-                        {moto.description}
+                        {motocarguero.description}
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-1">
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => handleEdit(moto)}
+                            onClick={() => handleEdit(motocarguero)}
                           >
                             <IconEdit className="h-4 w-4" />
                           </Button>
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => handleDelete(moto.id)}
+                            onClick={() => handleDelete(motocarguero.id)}
                             className="text-destructive hover:text-destructive"
                           >
                             <IconTrash className="h-4 w-4" />

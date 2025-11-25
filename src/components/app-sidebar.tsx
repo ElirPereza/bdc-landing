@@ -8,7 +8,7 @@ import {
   IconPhoto,
   IconSettings,
   IconTool,
-  IconMotorbike,
+  IconTruck,
 } from "@tabler/icons-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -42,9 +42,9 @@ const data = {
       icon: IconTool,
     },
     {
-      title: "Motocicletas",
-      url: "/dashboard/motos",
-      icon: IconMotorbike,
+      title: "Motocargueros",
+      url: "/dashboard/motocargueros",
+      icon: IconTruck,
     },
     {
       title: "Galería",

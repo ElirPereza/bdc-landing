@@ -14,7 +14,7 @@ export function Footer() {
               <span className="font-semibold text-xl text-foreground">MotoGallery</span>
             </div>
             <p className="text-muted-foreground text-sm">
-              Tu destino premium para repuestos y motocicletas de calidad.
+              Tu destino premium para repuestos y motocargueros de calidad.
             </p>
           </div>
 
@@ -32,8 +32,8 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#motos" className="text-muted-foreground hover:text-primary transition-colors">
-                  Motos
+                <a href="#motocargueros" className="text-muted-foreground hover:text-primary transition-colors">
+                  Motocargueros
                 </a>
               </li>
               <li>

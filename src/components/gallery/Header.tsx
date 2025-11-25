@@ -60,10 +60,10 @@ export function Header() {
             </Button>
             <Button
               variant="ghost"
-              onClick={() => scrollToSection("motos")}
+              onClick={() => scrollToSection("motocargueros")}
               className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'} font-medium`}
             >
-              Motos
+              Motocargueros
             </Button>
             <Link href="/dashboard">
               <Button

@@ -40,7 +40,7 @@ export default function Home() {
     },
   ]
 
-  const motos = [
+  const motocargueros = [
     {
       id: 1,
       image: "/placeholder-bike-1.jpg",
@@ -85,7 +85,7 @@ export default function Home() {
       <main>
         <Hero />
         <ProductGrid id="repuestos" title="Repuestos" products={repuestos} />
-        <ProductGrid id="motos" title="Motocicletas" products={motos} />
+        <ProductGrid id="motocargueros" title="Motocargueros" products={motocargueros} />
       </main>
       <Footer />
     </div>

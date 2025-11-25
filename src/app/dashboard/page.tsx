@@ -5,7 +5,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { IconTool, IconMotorbike, IconPhoto, IconEye } from "@tabler/icons-react"
+import { IconTool, IconTruck, IconPhoto, IconEye } from "@tabler/icons-react"
 import Link from "next/link"
 
 export default function DashboardPage() {
@@ -18,11 +18,11 @@ export default function DashboardPage() {
       href: "/dashboard/repuestos",
     },
     {
-      title: "Motocicletas",
+      title: "Motocargueros",
       value: "6",
       description: "modelos disponibles",
-      icon: IconMotorbike,
-      href: "/dashboard/motos",
+      icon: IconTruck,
+      href: "/dashboard/motocargueros",
     },
     {
       title: "Imágenes",
@@ -94,13 +94,13 @@ export default function DashboardPage() {
                   </div>
                 </Link>
                 <Link
-                  href="/dashboard/motos"
+                  href="/dashboard/motocargueros"
                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
                 >
-                  <IconMotorbike className="h-5 w-5 text-primary" />
+                  <IconTruck className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium text-sm">Agregar Motocicleta</p>
-                    <p className="text-xs text-muted-foreground">Añade un nuevo modelo de moto</p>
+                    <p className="font-medium text-sm">Agregar Motocarguero</p>
+                    <p className="text-xs text-muted-foreground">Añade un nuevo modelo de motocarguero</p>
                   </div>
                 </Link>
                 <Link

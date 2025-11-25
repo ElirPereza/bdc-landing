@@ -24,7 +24,7 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/hero-workshop.jpg"
-          alt="Taller de reparación de motocicletas"
+          alt="Taller de reparación de motocargueros"
           fill
           className="object-cover"
           priority
@@ -41,7 +41,7 @@ export function Hero() {
             </span>
           </h1>
           <p className="text-lg md:text-xl text-white/80 mb-8 font-light">
-            Explora nuestra galería premium de repuestos y motocicletas
+            Explora nuestra galería premium de repuestos y motocargueros
           </p>
           <Button
             onClick={scrollToGallery}
