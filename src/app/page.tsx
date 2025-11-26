@@ -6,7 +6,7 @@ export default function Home() {
     {
       id: 1,
       image: "/assets/repuesto-test.jpg",
-      name: "Filtro de Aceite Premium",
+      name: "MOTOR 300",
       description: "Máxima protección para tu motor. Compatible con múltiples modelos.",
     },
     {
@@ -45,7 +45,7 @@ export default function Home() {
     {
       id: 1,
       image: "/assets/motocarguero-test.jpg",
-      name: "Sport 1000R",
+      name: "Kameyo 300",
       description: "Potencia y diseño deportivo en perfecta armonía.",
     },
     {
