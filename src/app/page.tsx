@@ -1,4 +1,4 @@
-import { Header, Hero, ProductGrid, Footer } from "@/components/gallery"
+import { Header, Hero, ProductTabs, Footer } from "@/components/gallery"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 
 export default function Home() {
@@ -85,8 +85,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <ProductGrid id="repuestos" title="Repuestos" products={repuestos} />
-        <ProductGrid id="motocargueros" title="Motocargueros" products={motocargueros} />
+        <ProductTabs repuestos={repuestos} motocargueros={motocargueros} />
       </main>
       <Footer />
       <WhatsAppButton />

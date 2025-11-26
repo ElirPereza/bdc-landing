@@ -1,0 +1,76 @@
+"use client"
+
+import { useState } from "react"
+import { ProductCard } from "./ProductCard"
+import { Button } from "@/components/ui/button"
+
+interface Product {
+  id: number
+  image: string
+  name: string
+  description: string
+}
+
+interface ProductTabsProps {
+  repuestos: Product[]
+  motocargueros: Product[]
+}
+
+export function ProductTabs({ repuestos, motocargueros }: ProductTabsProps) {
+  const [activeTab, setActiveTab] = useState<"repuestos" | "motocargueros">("repuestos")
+
+  const products = activeTab === "repuestos" ? repuestos : motocargueros
+
+  return (
+    <section id="productos" className="py-20">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="text-center mb-12 fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3 tracking-tight">
+            Nuestros Productos
+          </h2>
+          <div className="w-16 h-0.5 bg-primary mx-auto mb-8" />
+
+          {/* Tabs */}
+          <div className="flex justify-center gap-2">
+            <Button
+              variant={activeTab === "repuestos" ? "default" : "outline"}
+              onClick={() => setActiveTab("repuestos")}
+              className="min-w-[140px]"
+            >
+              Repuestos
+            </Button>
+            <Button
+              variant={activeTab === "motocargueros" ? "default" : "outline"}
+              onClick={() => setActiveTab("motocargueros")}
+              className="min-w-[140px]"
+            >
+              Motocargueros
+            </Button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 slide-up">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              image={product.image}
+              name={product.name}
+              description={product.description}
+            />
+          ))}
+        </div>
+
+        {/* Ver más button */}
+        <div className="text-center mt-10">
+          <Button
+            variant="outline"
+            size="lg"
+            className="min-w-[200px]"
+          >
+            Ver más
+          </Button>
+        </div>
+      </div>
+    </section>
+  )
+}
