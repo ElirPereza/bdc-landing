@@ -15,7 +15,7 @@ export function ProductCard({ image, name, description }: ProductCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
-    <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg bg-card">
+    <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 bg-card hover-lift">
       <CardContent className="p-0 relative overflow-hidden aspect-square">
         {!imageLoaded && (
           <div className="absolute inset-0 bg-muted animate-pulse" />

@@ -34,19 +34,19 @@ export function Hero() {
 
       <div className="relative z-10 container mx-auto px-4 lg:px-8">
         <div className="max-w-xl">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight fade-in-up">
             Somos #1 en Colombia
-            <span className="block text-primary">
+            <span className="block gradient-text">
               en distribución
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-white/80 mb-8 font-light">
+          <p className="text-lg md:text-xl text-white/80 mb-8 font-light fade-in-up delay-200">
             Somos #1 en Colombia en la distribución de motocargueros y repuestos
           </p>
           <Button
             onClick={scrollToGallery}
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-base px-8 py-6 rounded-lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-base px-8 py-6 rounded-lg fade-in-up delay-400 hover-lift"
           >
             Explorar galería
             <ArrowDown className="ml-2 h-4 w-4" />

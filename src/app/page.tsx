@@ -5,7 +5,7 @@ export default function Home() {
   const repuestos = [
     {
       id: 1,
-      image: "/placeholder-parts-1.jpg",
+      image: "/assets/repuesto-test.jpg",
       name: "Filtro de Aceite Premium",
       description: "Máxima protección para tu motor. Compatible con múltiples modelos.",
     },
@@ -44,7 +44,7 @@ export default function Home() {
   const motocargueros = [
     {
       id: 1,
-      image: "/placeholder-bike-1.jpg",
+      image: "/assets/motocarguero-test.jpg",
       name: "Sport 1000R",
       description: "Potencia y diseño deportivo en perfecta armonía.",
     },

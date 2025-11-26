@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="bg-card border-t border-border py-12">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <div>
+          <div className="fade-in-up">
             <div className="flex items-center mb-4">
               <Image
                 src="/assets/logo-bdc.png"
@@ -22,7 +22,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div>
+          <div className="fade-in-up delay-200">
             <h3 className="font-medium mb-4 text-foreground">Enlaces</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -48,26 +48,26 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="fade-in-up delay-400">
             <h3 className="font-medium mb-4 text-foreground">Síguenos</h3>
             <div className="flex space-x-3">
               <a
                 href="#"
-                className="w-9 h-9 bg-secondary hover:bg-primary rounded-lg flex items-center justify-center transition-colors text-muted-foreground hover:text-primary-foreground"
+                className="w-9 h-9 bg-secondary hover:bg-primary rounded-lg flex items-center justify-center transition-all duration-300 text-muted-foreground hover:text-primary-foreground hover:scale-110"
                 aria-label="Facebook"
               >
                 <Facebook className="h-4 w-4" />
               </a>
               <a
                 href="#"
-                className="w-9 h-9 bg-secondary hover:bg-primary rounded-lg flex items-center justify-center transition-colors text-muted-foreground hover:text-primary-foreground"
+                className="w-9 h-9 bg-secondary hover:bg-primary rounded-lg flex items-center justify-center transition-all duration-300 text-muted-foreground hover:text-primary-foreground hover:scale-110"
                 aria-label="Instagram"
               >
                 <Instagram className="h-4 w-4" />
               </a>
               <a
                 href="#"
-                className="w-9 h-9 bg-secondary hover:bg-primary rounded-lg flex items-center justify-center transition-colors text-muted-foreground hover:text-primary-foreground"
+                className="w-9 h-9 bg-secondary hover:bg-primary rounded-lg flex items-center justify-center transition-all duration-300 text-muted-foreground hover:text-primary-foreground hover:scale-110"
                 aria-label="Twitter"
               >
                 <Twitter className="h-4 w-4" />
