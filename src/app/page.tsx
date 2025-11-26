@@ -9,6 +9,36 @@ export default function Home() {
       name: "MOTOR 300",
       description: "Máxima protección para tu motor. Compatible con múltiples modelos.",
     },
+    {
+      id: 2,
+      image: "/assets/repuesto-test.jpg",
+      name: "Kit de Bujías Iridium",
+      description: "Mayor durabilidad y rendimiento óptimo del motor.",
+    },
+    {
+      id: 3,
+      image: "/assets/repuesto-test.jpg",
+      name: "Disco de Freno Ventilado",
+      description: "Frenado superior con tecnología de ventilación avanzada.",
+    },
+    {
+      id: 4,
+      image: "/assets/repuesto-test.jpg",
+      name: "Cadena de Transmisión",
+      description: "Alta resistencia y durabilidad para cualquier terreno.",
+    },
+    {
+      id: 5,
+      image: "/assets/repuesto-test.jpg",
+      name: "Espejos Retrovisores",
+      description: "Diseño aerodinámico con visibilidad panorámica.",
+    },
+    {
+      id: 6,
+      image: "/assets/repuesto-test.jpg",
+      name: "Manillar Deportivo",
+      description: "Ergonomía perfecta para máximo control y confort.",
+    },
   ]
 
   const motocargueros = [
@@ -17,6 +47,36 @@ export default function Home() {
       image: "/assets/motocarguero-test.jpg",
       name: "Kameyo 300",
       description: "Potencia y diseño deportivo en perfecta armonía.",
+    },
+    {
+      id: 2,
+      image: "/assets/motocarguero-test.jpg",
+      name: "Cruiser Classic 800",
+      description: "Estilo atemporal con tecnología moderna.",
+    },
+    {
+      id: 3,
+      image: "/assets/motocarguero-test.jpg",
+      name: "Naked Street 600",
+      description: "Agilidad urbana con carácter agresivo.",
+    },
+    {
+      id: 4,
+      image: "/assets/motocarguero-test.jpg",
+      name: "Adventure 1200 GS",
+      description: "Lista para cualquier aventura, en cualquier terreno.",
+    },
+    {
+      id: 5,
+      image: "/assets/motocarguero-test.jpg",
+      name: "Urban Scooter 300",
+      description: "Movilidad urbana eficiente y elegante.",
+    },
+    {
+      id: 6,
+      image: "/assets/motocarguero-test.jpg",
+      name: "Custom Bobber 750",
+      description: "Personalización extrema con alma rebelde.",
     },
   ]
 
