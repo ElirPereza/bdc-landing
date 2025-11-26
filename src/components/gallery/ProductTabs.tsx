@@ -65,16 +65,18 @@ export function ProductTabs({ repuestos, motocargueros }: ProductTabsProps) {
           ))}
         </div>
 
-        {/* Ver más button */}
-        <div className="text-center mt-10 fade-in-up delay-600">
-          <Button
-            variant="outline"
-            size="lg"
-            className="min-w-[200px] hover-lift"
-          >
-            Ver más
-          </Button>
-        </div>
+        {/* Ver más button - solo para repuestos */}
+        {activeTab === "repuestos" && (
+          <div className="text-center mt-10 fade-in-up delay-600">
+            <Button
+              variant="outline"
+              size="lg"
+              className="min-w-[200px] hover-lift"
+            >
+              Ver más
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   )
