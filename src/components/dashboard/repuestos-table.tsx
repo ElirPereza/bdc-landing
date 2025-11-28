@@ -21,7 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { IconPlus, IconTrash, IconEdit, IconLoader2 } from "@tabler/icons-react"
+import { IconPlus, IconTrash, IconEdit, IconLoader2, IconStar, IconStarFilled } from "@tabler/icons-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import type { Repuesto } from "@/types/database.types"
 import { createRepuesto, updateRepuesto, deleteRepuesto } from "@/lib/actions/repuestos"
@@ -45,6 +45,7 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
     stock: "",
     category: "",
     is_active: true,
+    is_featured: false,
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,6 +60,7 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
         stock: formData.stock ? parseInt(formData.stock) : 0,
         category: formData.category || null,
         is_active: formData.is_active,
+        is_featured: formData.is_featured,
       }
 
       if (editingRepuesto) {
@@ -77,7 +79,6 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
         const result = await createRepuesto(data)
         if (result.success) {
           toast.success("Repuesto creado correctamente")
-          // Refresh will happen via revalidatePath
           window.location.reload()
         } else {
           toast.error(result.error || "Error al crear")
@@ -97,6 +98,7 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
       stock: repuesto.stock?.toString() || "0",
       category: repuesto.category || "",
       is_active: repuesto.is_active ?? true,
+      is_featured: repuesto.is_featured ?? false,
     })
     setIsDialogOpen(true)
   }
@@ -115,6 +117,21 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
     })
   }
 
+  const toggleFeatured = (repuesto: Repuesto) => {
+    startTransition(async () => {
+      const newFeatured = !repuesto.is_featured
+      const result = await updateRepuesto(repuesto.id, { is_featured: newFeatured })
+      if (result.success) {
+        setRepuestos(repuestos.map(r =>
+          r.id === repuesto.id ? { ...r, is_featured: newFeatured } : r
+        ))
+        toast.success(newFeatured ? "Marcado como destacado" : "Removido de destacados")
+      } else {
+        toast.error("Error al actualizar")
+      }
+    })
+  }
+
   const resetForm = () => {
     setFormData({
       name: "",
@@ -124,6 +141,7 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
       stock: "",
       category: "",
       is_active: true,
+      is_featured: false,
     })
     setEditingRepuesto(null)
     setIsDialogOpen(false)
@@ -137,12 +155,17 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
     }).format(price)
   }
 
+  const featuredCount = repuestos.filter(r => r.is_featured).length
+
   return (
     <>
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Repuestos</h1>
-          <p className="text-muted-foreground text-sm">Gestiona los repuestos de tu catálogo</p>
+          <p className="text-muted-foreground text-sm">
+            Gestiona los repuestos de tu catálogo
+            <span className="ml-2 text-primary">({featuredCount} destacados)</span>
+          </p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
@@ -216,13 +239,23 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
                   onChange={(url) => setFormData({ ...formData, image_url: url })}
                 />
               </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="is_active"
-                  checked={formData.is_active}
-                  onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked as boolean })}
-                />
-                <Label htmlFor="is_active" className="text-sm">Activo (visible en la tienda)</Label>
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="is_active"
+                    checked={formData.is_active}
+                    onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked as boolean })}
+                  />
+                  <Label htmlFor="is_active" className="text-sm">Activo (visible en la tienda)</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="is_featured"
+                    checked={formData.is_featured}
+                    onCheckedChange={(checked) => setFormData({ ...formData, is_featured: checked as boolean })}
+                  />
+                  <Label htmlFor="is_featured" className="text-sm">Destacado (mostrar en página principal)</Label>
+                </div>
               </div>
               <div className="flex justify-end gap-2 pt-4">
                 <Button type="button" variant="outline" onClick={resetForm}>
@@ -246,6 +279,7 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-12"></TableHead>
                 <TableHead className="w-16">Imagen</TableHead>
                 <TableHead>Nombre</TableHead>
                 <TableHead>Categoría</TableHead>
@@ -258,13 +292,28 @@ export function RepuestosTable({ initialData }: RepuestosTableProps) {
             <TableBody>
               {repuestos.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                  <TableCell colSpan={8} className="text-center text-muted-foreground py-8">
                     No hay repuestos registrados. ¡Agrega el primero!
                   </TableCell>
                 </TableRow>
               ) : (
                 repuestos.map((repuesto) => (
                   <TableRow key={repuesto.id}>
+                    <TableCell>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => toggleFeatured(repuesto)}
+                        disabled={isPending}
+                        title={repuesto.is_featured ? "Quitar de destacados" : "Marcar como destacado"}
+                      >
+                        {repuesto.is_featured ? (
+                          <IconStarFilled className="h-4 w-4 text-yellow-500" />
+                        ) : (
+                          <IconStar className="h-4 w-4 text-muted-foreground" />
+                        )}
+                      </Button>
+                    </TableCell>
                     <TableCell>
                       <div className="relative w-12 h-12 rounded overflow-hidden bg-muted">
                         {repuesto.image_url ? (

@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { ProductCard } from "./ProductCard"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 interface Product {
   id: string | number
@@ -20,6 +22,8 @@ export function ProductTabs({ repuestos, motocargueros }: ProductTabsProps) {
   const [activeTab, setActiveTab] = useState<"repuestos" | "motocargueros">("repuestos")
 
   const products = activeTab === "repuestos" ? repuestos : motocargueros
+  const catalogUrl = activeTab === "repuestos" ? "/repuestos" : "/motocargueros"
+  const catalogLabel = activeTab === "repuestos" ? "Ver todos los repuestos" : "Ver todos los motocargueros"
 
   return (
     <section id="productos" className="py-20">
@@ -49,34 +53,44 @@ export function ProductTabs({ repuestos, motocargueros }: ProductTabsProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product, index) => (
-            <div
-              key={product.id}
-              className="fade-in-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <ProductCard
-                image={product.image}
-                name={product.name}
-                description={product.description}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Ver más button - solo para repuestos */}
-        {activeTab === "repuestos" && (
-          <div className="text-center mt-10 fade-in-up delay-600">
-            <Button
-              variant="outline"
-              size="lg"
-              className="min-w-[200px] hover-lift"
-            >
-              Ver más
-            </Button>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product, index) => (
+              <div
+                key={product.id}
+                className="fade-in-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <ProductCard
+                  image={product.image}
+                  name={product.name}
+                  description={product.description}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">
+              No hay productos destacados en esta categoría.
+            </p>
           </div>
         )}
+
+        {/* Ver catálogo completo */}
+        <div className="text-center mt-10 fade-in-up delay-600">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="min-w-[250px] hover-lift group"
+          >
+            <Link href={catalogUrl}>
+              {catalogLabel}
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   )

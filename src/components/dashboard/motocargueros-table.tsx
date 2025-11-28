@@ -21,7 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { IconPlus, IconTrash, IconEdit, IconLoader2 } from "@tabler/icons-react"
+import { IconPlus, IconTrash, IconEdit, IconLoader2, IconStar, IconStarFilled } from "@tabler/icons-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import type { Motocarguero, MotocargueroSpecs } from "@/types/database.types"
 import { createMotocarguero, updateMotocarguero, deleteMotocarguero } from "@/lib/actions/motocargueros"
@@ -46,6 +46,7 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
     carga: "",
     combustible: "",
     is_active: true,
+    is_featured: false,
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,6 +65,7 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
         price: formData.price ? parseFloat(formData.price) : null,
         specs,
         is_active: formData.is_active,
+        is_featured: formData.is_featured,
       }
 
       if (editingMotocarguero) {
@@ -103,6 +105,7 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
       carga: specs.carga || "",
       combustible: specs.combustible || "",
       is_active: motocarguero.is_active ?? true,
+      is_featured: motocarguero.is_featured ?? false,
     })
     setIsDialogOpen(true)
   }
@@ -121,6 +124,21 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
     })
   }
 
+  const toggleFeatured = (motocarguero: Motocarguero) => {
+    startTransition(async () => {
+      const newFeatured = !motocarguero.is_featured
+      const result = await updateMotocarguero(motocarguero.id, { is_featured: newFeatured })
+      if (result.success) {
+        setMotocargueros(motocargueros.map(m =>
+          m.id === motocarguero.id ? { ...m, is_featured: newFeatured } : m
+        ))
+        toast.success(newFeatured ? "Marcado como destacado" : "Removido de destacados")
+      } else {
+        toast.error("Error al actualizar")
+      }
+    })
+  }
+
   const resetForm = () => {
     setFormData({
       name: "",
@@ -131,6 +149,7 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
       carga: "",
       combustible: "",
       is_active: true,
+      is_featured: false,
     })
     setEditingMotocarguero(null)
     setIsDialogOpen(false)
@@ -151,12 +170,17 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
     return {}
   }
 
+  const featuredCount = motocargueros.filter(m => m.is_featured).length
+
   return (
     <>
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Motocargueros</h1>
-          <p className="text-muted-foreground text-sm">Gestiona los motocargueros de tu catálogo</p>
+          <p className="text-muted-foreground text-sm">
+            Gestiona los motocargueros de tu catálogo
+            <span className="ml-2 text-primary">({featuredCount} destacados)</span>
+          </p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
@@ -229,13 +253,23 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
                   onChange={(url) => setFormData({ ...formData, image_url: url })}
                 />
               </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="is_active"
-                  checked={formData.is_active}
-                  onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked as boolean })}
-                />
-                <Label htmlFor="is_active" className="text-sm">Activo (visible en la tienda)</Label>
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="is_active"
+                    checked={formData.is_active}
+                    onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked as boolean })}
+                  />
+                  <Label htmlFor="is_active" className="text-sm">Activo (visible en la tienda)</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="is_featured"
+                    checked={formData.is_featured}
+                    onCheckedChange={(checked) => setFormData({ ...formData, is_featured: checked as boolean })}
+                  />
+                  <Label htmlFor="is_featured" className="text-sm">Destacado (mostrar en página principal)</Label>
+                </div>
               </div>
               <div className="flex justify-end gap-2 pt-4">
                 <Button type="button" variant="outline" onClick={resetForm}>
@@ -259,6 +293,7 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-12"></TableHead>
                 <TableHead className="w-16">Imagen</TableHead>
                 <TableHead>Nombre</TableHead>
                 <TableHead>Especificaciones</TableHead>
@@ -270,7 +305,7 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
             <TableBody>
               {motocargueros.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                  <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                     No hay motocargueros registrados. ¡Agrega el primero!
                   </TableCell>
                 </TableRow>
@@ -279,6 +314,21 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
                   const specs = getSpecs(motocarguero.specs)
                   return (
                     <TableRow key={motocarguero.id}>
+                      <TableCell>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => toggleFeatured(motocarguero)}
+                          disabled={isPending}
+                          title={motocarguero.is_featured ? "Quitar de destacados" : "Marcar como destacado"}
+                        >
+                          {motocarguero.is_featured ? (
+                            <IconStarFilled className="h-4 w-4 text-yellow-500" />
+                          ) : (
+                            <IconStar className="h-4 w-4 text-muted-foreground" />
+                          )}
+                        </Button>
+                      </TableCell>
                       <TableCell>
                         <div className="relative w-12 h-12 rounded overflow-hidden bg-muted">
                           {motocarguero.image_url ? (

@@ -1,11 +1,11 @@
 import { Header, Hero, ProductTabs, Footer } from "@/components/gallery"
 import { WhatsAppButton } from "@/components/whatsapp-button"
-import { getActiveRepuestos, getActiveMotocargueros } from "@/lib/actions/public"
+import { getFeaturedRepuestos, getFeaturedMotocargueros } from "@/lib/actions/public"
 
 export default async function Home() {
   const [repuestosData, motocargueroData] = await Promise.all([
-    getActiveRepuestos(),
-    getActiveMotocargueros(),
+    getFeaturedRepuestos(),
+    getFeaturedMotocargueros(),
   ])
 
   // Transform data for ProductTabs component

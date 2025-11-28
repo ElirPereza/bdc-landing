@@ -1,7 +1,6 @@
 "use client"
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import Image from "next/image"
 
@@ -37,13 +36,6 @@ export function ProductCard({ image, name, description }: ProductCardProps) {
         <p className="text-sm text-muted-foreground line-clamp-2">
           {description}
         </p>
-        <Button
-          variant="outline"
-          size="sm"
-          className="w-full mt-2 border-border hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
-        >
-          Ver detalle
-        </Button>
       </CardFooter>
     </Card>
   )
