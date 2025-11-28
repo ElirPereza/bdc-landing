@@ -7,34 +7,37 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { IconTool, IconTruck, IconPhoto, IconEye } from "@tabler/icons-react"
 import Link from "next/link"
+import { getProductCounts } from "@/lib/actions/public"
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const counts = await getProductCounts()
+
   const stats = [
     {
       title: "Repuestos",
-      value: "6",
+      value: counts.repuestos.toString(),
       description: "productos en catálogo",
       icon: IconTool,
       href: "/dashboard/repuestos",
     },
     {
       title: "Motocargueros",
-      value: "6",
+      value: counts.motocargueros.toString(),
       description: "modelos disponibles",
       icon: IconTruck,
       href: "/dashboard/motocargueros",
     },
     {
       title: "Imágenes",
-      value: "13",
+      value: "-",
       description: "en la galería",
       icon: IconPhoto,
       href: "/dashboard/gallery",
     },
     {
-      title: "Visitas",
-      value: "1,234",
-      description: "este mes",
+      title: "Total Productos",
+      value: (counts.repuestos + counts.motocargueros).toString(),
+      description: "en el catálogo",
       icon: IconEye,
       href: "#",
     },
@@ -55,7 +58,7 @@ export default function DashboardPage() {
         <div className="flex flex-1 flex-col p-4 lg:p-6">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-            <p className="text-muted-foreground text-sm">Bienvenido al panel de administración de MotoGallery</p>
+            <p className="text-muted-foreground text-sm">Bienvenido al panel de administración de BDC</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -89,8 +92,8 @@ export default function DashboardPage() {
                 >
                   <IconTool className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium text-sm">Agregar Repuesto</p>
-                    <p className="text-xs text-muted-foreground">Añade un nuevo producto al catálogo</p>
+                    <p className="font-medium text-sm">Gestionar Repuestos</p>
+                    <p className="text-xs text-muted-foreground">Agregar, editar o eliminar repuestos</p>
                   </div>
                 </Link>
                 <Link
@@ -99,8 +102,8 @@ export default function DashboardPage() {
                 >
                   <IconTruck className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium text-sm">Agregar Motocarguero</p>
-                    <p className="text-xs text-muted-foreground">Añade un nuevo modelo de motocarguero</p>
+                    <p className="font-medium text-sm">Gestionar Motocargueros</p>
+                    <p className="text-xs text-muted-foreground">Agregar, editar o eliminar motocargueros</p>
                   </div>
                 </Link>
                 <Link
@@ -118,24 +121,26 @@ export default function DashboardPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Información</CardTitle>
+                <CardTitle className="text-lg">Información del Sistema</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-sm font-medium">Estado del Sitio</p>
+                    <p className="text-sm font-medium">Estado de la Base de Datos</p>
                     <p className="text-xs text-muted-foreground">
                       <span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>
-                      En línea
+                      Conectado a Supabase
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium">Última Actualización</p>
-                    <p className="text-xs text-muted-foreground">Hace 2 horas</p>
+                    <p className="text-sm font-medium">Landing Page</p>
+                    <p className="text-xs text-muted-foreground">
+                      <Link href="/" className="text-primary hover:underline">Ver sitio público →</Link>
+                    </p>
                   </div>
                   <div>
                     <p className="text-sm font-medium">Versión</p>
-                    <p className="text-xs text-muted-foreground">1.0.0</p>
+                    <p className="text-xs text-muted-foreground">1.0.0 - Next.js 16</p>
                   </div>
                 </div>
               </CardContent>
