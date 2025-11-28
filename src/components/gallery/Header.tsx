@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Menu } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import Image from "next/image"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,19 +19,10 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      const offset = 80
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      })
-    }
-  }
+  const navLinks = [
+    { href: "/repuestos", label: "Repuestos" },
+    { href: "/motocargueros", label: "Motocargueros" },
+  ]
 
   return (
     <header
@@ -52,21 +44,18 @@ export function Header() {
             />
           </Link>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            <Button
-              variant="ghost"
-              onClick={() => scrollToSection("repuestos")}
-              className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'} font-medium`}
-            >
-              Repuestos
-            </Button>
-            <Button
-              variant="ghost"
-              onClick={() => scrollToSection("motocargueros")}
-              className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'} font-medium`}
-            >
-              Motocargueros
-            </Button>
+            {navLinks.map((link) => (
+              <Link key={link.href} href={link.href}>
+                <Button
+                  variant="ghost"
+                  className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'} font-medium`}
+                >
+                  {link.label}
+                </Button>
+              </Link>
+            ))}
             <Link href="/dashboard">
               <Button
                 variant="outline"
@@ -77,16 +66,48 @@ export function Header() {
             </Link>
           </div>
 
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <Button
               variant="ghost"
               size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`${isScrolled ? 'text-foreground' : 'text-white'}`}
             >
-              <Menu className="h-5 w-5" />
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-border/50 pt-4">
+            <div className="flex flex-col space-y-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-foreground hover:text-primary font-medium"
+                  >
+                    {link.label}
+                  </Button>
+                </Link>
+              ))}
+              <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button
+                  variant="outline"
+                  className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                >
+                  Admin
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   )
