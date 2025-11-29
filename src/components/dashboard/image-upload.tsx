@@ -4,7 +4,7 @@ import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { IconUpload, IconLoader2, IconX, IconPhoto } from "@tabler/icons-react"
-import { uploadImage } from "@/lib/actions/storage"
+import { uploadImage, uploadBannerImage } from "@/lib/actions/storage"
 import { toast } from "sonner"
 import Image from "next/image"
 
@@ -12,9 +12,10 @@ interface ImageUploadProps {
   value: string
   onChange: (url: string) => void
   placeholder?: string
+  bucket?: "products" | "banners"
 }
 
-export function ImageUpload({ value, onChange, placeholder = "URL de imagen" }: ImageUploadProps) {
+export function ImageUpload({ value, onChange, placeholder = "URL de imagen", bucket = "products" }: ImageUploadProps) {
   const [isUploading, setIsUploading] = useState(false)
   const [preview, setPreview] = useState<string | null>(value || null)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -41,7 +42,9 @@ export function ImageUpload({ value, onChange, placeholder = "URL de imagen" }: 
       const formData = new FormData()
       formData.append("file", file)
 
-      const result = await uploadImage(formData)
+      const result = bucket === "banners"
+        ? await uploadBannerImage(formData)
+        : await uploadImage(formData)
 
       if (result.success && result.url) {
         setPreview(result.url)

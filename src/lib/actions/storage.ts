@@ -2,10 +2,11 @@
 
 import { createClient } from "@/utils/supabase/server"
 
-const BUCKET_NAME = "products"
+const DEFAULT_BUCKET = "products"
 
 export async function uploadImage(
-  formData: FormData
+  formData: FormData,
+  bucket: string = DEFAULT_BUCKET
 ): Promise<{ success: boolean; url?: string; error?: string }> {
   try {
     const file = formData.get("file") as File
@@ -20,7 +21,7 @@ export async function uploadImage(
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
 
     const { error: uploadError } = await supabase.storage
-      .from(BUCKET_NAME)
+      .from(bucket)
       .upload(fileName, file, {
         cacheControl: "3600",
         upsert: false,
@@ -33,7 +34,7 @@ export async function uploadImage(
 
     // Get public URL
     const { data: urlData } = supabase.storage
-      .from(BUCKET_NAME)
+      .from(bucket)
       .getPublicUrl(fileName)
 
     return { success: true, url: urlData.publicUrl }
@@ -43,7 +44,13 @@ export async function uploadImage(
   }
 }
 
-export async function deleteImage(imageUrl: string): Promise<{ success: boolean; error?: string }> {
+export async function uploadBannerImage(
+  formData: FormData
+): Promise<{ success: boolean; url?: string; error?: string }> {
+  return uploadImage(formData, "banners")
+}
+
+export async function deleteImage(imageUrl: string, bucket: string = DEFAULT_BUCKET): Promise<{ success: boolean; error?: string }> {
   try {
     const supabase = await createClient()
 
@@ -52,7 +59,7 @@ export async function deleteImage(imageUrl: string): Promise<{ success: boolean;
     const fileName = urlParts[urlParts.length - 1]
 
     const { error } = await supabase.storage
-      .from(BUCKET_NAME)
+      .from(bucket)
       .remove([fileName])
 
     if (error) {
@@ -67,9 +74,9 @@ export async function deleteImage(imageUrl: string): Promise<{ success: boolean;
   }
 }
 
-export async function getStorageUrl(): Promise<string> {
+export async function getStorageUrl(bucket: string = DEFAULT_BUCKET): Promise<string> {
   const supabase = await createClient()
-  const { data } = supabase.storage.from(BUCKET_NAME).getPublicUrl("")
+  const { data } = supabase.storage.from(bucket).getPublicUrl("")
   // Remove trailing slash and empty filename
   return data.publicUrl.replace(/\/$/, "")
 }

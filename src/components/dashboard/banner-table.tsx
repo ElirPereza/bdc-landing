@@ -160,6 +160,7 @@ export function BannerTable({ initialData }: BannerTableProps) {
                 <ImageUpload
                   value={formData.image_url}
                   onChange={(url) => setFormData({ ...formData, image_url: url })}
+                  bucket="banners"
                 />
               </div>
               <div className="space-y-2">
