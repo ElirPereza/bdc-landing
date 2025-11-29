@@ -12,6 +12,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      banner_images: {
+        Row: {
+          created_at: string | null
+          display_order: number | null
+          id: string
+          image_url: string
+          is_active: boolean | null
+          subtitle: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_url: string
+          is_active?: boolean | null
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string
+          is_active?: boolean | null
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       motocargueros: {
         Row: {
           created_at: string | null
@@ -195,10 +228,13 @@ export type TablesUpdate<
 // Convenience types
 export type Repuesto = Tables<"repuestos">
 export type Motocarguero = Tables<"motocargueros">
+export type BannerImage = Tables<"banner_images">
 export type InsertRepuesto = TablesInsert<"repuestos">
 export type InsertMotocarguero = TablesInsert<"motocargueros">
+export type InsertBannerImage = TablesInsert<"banner_images">
 export type UpdateRepuesto = TablesUpdate<"repuestos">
 export type UpdateMotocarguero = TablesUpdate<"motocargueros">
+export type UpdateBannerImage = TablesUpdate<"banner_images">
 
 // Specs type for motocargueros
 export interface MotocargueroSpecs {

@@ -3,10 +3,8 @@
 import * as React from "react"
 import {
   IconDashboard,
-  IconHelp,
   IconHome,
   IconPhoto,
-  IconSettings,
   IconTool,
   IconTruck,
 } from "@tabler/icons-react"
@@ -48,8 +46,8 @@ const data = {
       icon: IconTruck,
     },
     {
-      title: "Galería",
-      url: "/dashboard/gallery",
+      title: "Banner",
+      url: "/dashboard/banner",
       icon: IconPhoto,
     },
   ],
@@ -58,16 +56,6 @@ const data = {
       title: "Ver Sitio",
       url: "/",
       icon: IconHome,
-    },
-    {
-      title: "Configuración",
-      url: "/dashboard/settings",
-      icon: IconSettings,
-    },
-    {
-      title: "Ayuda",
-      url: "#",
-      icon: IconHelp,
     },
   ],
 }

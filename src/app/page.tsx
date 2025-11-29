@@ -1,11 +1,13 @@
 import { Header, Hero, ProductTabs, Footer } from "@/components/gallery"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { getFeaturedRepuestos, getFeaturedMotocargueros } from "@/lib/actions/public"
+import { getActiveBannerImages } from "@/lib/actions/banner"
 
 export default async function Home() {
-  const [repuestosData, motocargueroData] = await Promise.all([
+  const [repuestosData, motocargueroData, bannersData] = await Promise.all([
     getFeaturedRepuestos(),
     getFeaturedMotocargueros(),
+    getActiveBannerImages(),
   ])
 
   // Transform data for ProductTabs component
@@ -23,11 +25,19 @@ export default async function Home() {
     description: m.description || "",
   }))
 
+  // Transform banners for Hero component
+  const banners = bannersData.map((b) => ({
+    id: b.id,
+    image_url: b.image_url,
+    title: b.title,
+    subtitle: b.subtitle,
+  }))
+
   return (
     <div className="min-h-screen">
       <Header />
       <main>
-        <Hero />
+        <Hero banners={banners} />
         <ProductTabs repuestos={repuestos} motocargueros={motocargueros} />
       </main>
       <Footer />
