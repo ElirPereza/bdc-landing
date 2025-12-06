@@ -50,8 +50,8 @@ export function Header() {
               src="/assets/logo-bdc.png"
               alt="BDC Logo"
               width={120}
-              height={120}
-              className="rounded-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28"
+              height={60}
+              className="rounded-lg h-10 sm:h-12 md:h-14 w-auto object-contain"
             />
           </Link>
 
