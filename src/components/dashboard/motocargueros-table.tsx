@@ -24,6 +24,7 @@ import {
 import { IconPlus, IconTrash, IconEdit, IconLoader2, IconStar, IconStarFilled } from "@tabler/icons-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import type { Motocarguero, MotocargueroSpecs } from "@/types/database.types"
+import { formatPrice } from "@/lib/utils"
 import { createMotocarguero, updateMotocarguero, deleteMotocarguero } from "@/lib/actions/motocargueros"
 import { toast } from "sonner"
 import { ImageUpload } from "./image-upload"
@@ -153,16 +154,6 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
     })
     setEditingMotocarguero(null)
     setIsDialogOpen(false)
-  }
-
-  const formatPrice = (price: number | null) => {
-    if (!price) return "-"
-    return new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price)
   }
 
   const getSpecs = (specs: unknown): MotocargueroSpecs => {

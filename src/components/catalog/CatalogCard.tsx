@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import Image from "next/image"
 import { MessageCircle } from "lucide-react"
+import { formatPrice } from "@/lib/utils"
 
 interface CatalogCardProps {
   image: string
@@ -13,16 +14,6 @@ interface CatalogCardProps {
   price?: number | null
   specs?: Record<string, string>
   whatsappNumber?: string
-}
-
-function formatPrice(price: number | null | undefined): string {
-  if (!price) return "Consultar precio"
-  return new Intl.NumberFormat("es-CO", {
-    style: "currency",
-    currency: "COP",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(price)
 }
 
 export function CatalogCard({
