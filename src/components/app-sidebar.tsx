@@ -56,6 +56,7 @@ const data = {
       title: "Ver Sitio",
       url: "/",
       icon: IconHome,
+      openInNewTab: true,
     },
   ],
 }
