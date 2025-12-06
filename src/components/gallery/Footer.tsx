@@ -1,5 +1,4 @@
 import { Facebook, Instagram, Twitter, MapPin } from "lucide-react"
-import Link from "next/link"
 import Image from "next/image"
 
 const locations = [
@@ -46,11 +45,6 @@ export function Footer() {
                 <a href="#motocargueros" className="text-muted-foreground hover:text-primary transition-colors">
                   Motocargueros
                 </a>
-              </li>
-              <li>
-                <Link href="/dashboard" className="text-muted-foreground hover:text-primary transition-colors">
-                  Panel Admin
-                </Link>
               </li>
             </ul>
           </div>

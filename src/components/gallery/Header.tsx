@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import { createClient } from "@/utils/supabase/client"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +19,15 @@ export function Header() {
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const supabase = createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      setIsLoggedIn(!!user)
+    }
+    checkAuth()
   }, [])
 
   const navLinks = [
@@ -56,14 +67,16 @@ export function Header() {
                 </Button>
               </Link>
             ))}
-            <Link href="/dashboard">
-              <Button
-                variant="outline"
-                className={`ml-2 ${isScrolled ? 'border-primary bg-primary text-primary-foreground hover:bg-transparent hover:text-primary' : 'border-white/30 bg-white/10 text-white hover:bg-transparent hover:text-white'}`}
-              >
-                Admin
-              </Button>
-            </Link>
+            {isLoggedIn && (
+              <Link href="/dashboard">
+                <Button
+                  variant="outline"
+                  className={`ml-2 ${isScrolled ? 'border-primary bg-primary text-primary-foreground hover:bg-transparent hover:text-primary' : 'border-white/30 bg-white/10 text-white hover:bg-transparent hover:text-white'}`}
+                >
+                  Admin
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -97,14 +110,16 @@ export function Header() {
                   </Button>
                 </Link>
               ))}
-              <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button
-                  variant="outline"
-                  className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                >
-                  Admin
-                </Button>
-              </Link>
+              {isLoggedIn && (
+                <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="outline"
+                    className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Admin
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         )}
