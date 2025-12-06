@@ -13,14 +13,14 @@ export default async function Home() {
   // Transform data for ProductTabs component
   const repuestos = repuestosData.map((r) => ({
     id: r.id,
-    image: r.image_url || "/assets/repuesto-test.jpg",
+    image: r.image_url || "",
     name: r.name,
     description: r.description || "",
   }))
 
   const motocargueros = motocargueroData.map((m) => ({
     id: m.id,
-    image: m.image_url || "/assets/motocarguero-test.jpg",
+    image: m.image_url || "",
     name: m.name,
     description: m.description || "",
   }))

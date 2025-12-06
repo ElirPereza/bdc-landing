@@ -85,6 +85,3 @@ export async function deleteMotocarguero(id: string): Promise<{ success: boolean
   return { success: true }
 }
 
-export async function toggleMotocargueroActive(id: string, isActive: boolean): Promise<{ success: boolean; error?: string }> {
-  return updateMotocarguero(id, { is_active: isActive })
-}

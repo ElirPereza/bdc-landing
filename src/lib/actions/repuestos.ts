@@ -85,6 +85,3 @@ export async function deleteRepuesto(id: string): Promise<{ success: boolean; er
   return { success: true }
 }
 
-export async function toggleRepuestoActive(id: string, isActive: boolean): Promise<{ success: boolean; error?: string }> {
-  return updateRepuesto(id, { is_active: isActive })
-}
