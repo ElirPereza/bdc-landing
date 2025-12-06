@@ -18,9 +18,12 @@ export type Database = {
           display_order: number | null
           id: string
           image_url: string
+          image_url_mobile: string | null
           is_active: boolean | null
           subtitle: string | null
           title: string | null
+          show_title: boolean | null
+          show_subtitle: boolean | null
           updated_at: string | null
         }
         Insert: {
@@ -28,9 +31,12 @@ export type Database = {
           display_order?: number | null
           id?: string
           image_url: string
+          image_url_mobile?: string | null
           is_active?: boolean | null
           subtitle?: string | null
           title?: string | null
+          show_title?: boolean | null
+          show_subtitle?: boolean | null
           updated_at?: string | null
         }
         Update: {
@@ -38,9 +44,12 @@ export type Database = {
           display_order?: number | null
           id?: string
           image_url?: string
+          image_url_mobile?: string | null
           is_active?: boolean | null
           subtitle?: string | null
           title?: string | null
+          show_title?: boolean | null
+          show_subtitle?: boolean | null
           updated_at?: string | null
         }
         Relationships: []

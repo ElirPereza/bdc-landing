@@ -8,8 +8,11 @@ import { useState, useEffect, useCallback } from "react"
 interface BannerImage {
   id: string
   image_url: string
+  image_url_mobile: string | null
   title: string | null
   subtitle: string | null
+  show_title: boolean | null
+  show_subtitle: boolean | null
 }
 
 interface HeroProps {
@@ -22,8 +25,20 @@ export function Hero({ banners = [] }: HeroProps) {
 
   // Use default banner if no banners from DB
   const images = banners.length > 0 ? banners : [
-    { id: "default", image_url: "/assets/banner-1.jpg", title: null, subtitle: null }
+    {
+      id: "default",
+      image_url: "/assets/banner-1.jpg",
+      image_url_mobile: null,
+      title: "Somos #1 en Colombia",
+      subtitle: "Somos #1 en Colombia en la distribución de motocargueros y repuestos",
+      show_title: true,
+      show_subtitle: true
+    }
   ]
+
+  // Check if current banner should show any content (title, subtitle)
+  const currentBanner = images[currentIndex]
+  const showContent = currentBanner?.show_title || currentBanner?.show_subtitle
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % images.length)
@@ -74,40 +89,54 @@ export function Hero({ banners = [] }: HeroProps) {
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
           >
+            {/* Desktop Image */}
             <Image
               src={banner.image_url}
               alt={banner.title || "BDC Motocargueros"}
               fill
-              className="object-cover"
+              className={`object-cover ${banner.image_url_mobile ? "hidden md:block" : ""}`}
               priority={index === 0}
             />
+            {/* Mobile Image (if exists) */}
+            {banner.image_url_mobile && (
+              <Image
+                src={banner.image_url_mobile}
+                alt={banner.title || "BDC Motocargueros"}
+                fill
+                className="object-cover block md:hidden"
+                priority={index === 0}
+              />
+            )}
           </div>
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-primary/10" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 lg:px-8">
-        <div className="max-w-xl">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight fade-in-up">
-            Somos #1 en Colombia
-            <span className="block gradient-text">
-              en distribución
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 mb-8 font-light fade-in-up delay-200">
-            Somos #1 en Colombia en la distribución de motocargueros y repuestos
-          </p>
-          <Button
-            onClick={scrollToGallery}
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-base px-8 py-6 rounded-lg fade-in-up delay-400 hover-lift"
-          >
-            Explorar galería
-            <ArrowDown className="ml-2 h-4 w-4" />
-          </Button>
+      {/* Content - Only show if current banner has text enabled */}
+      {showContent && (
+        <div className="relative z-10 container mx-auto px-4 lg:px-8">
+          <div className="max-w-xl">
+            {currentBanner?.show_title && currentBanner?.title && (
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight fade-in-up">
+                {currentBanner.title}
+              </h1>
+            )}
+            {currentBanner?.show_subtitle && currentBanner?.subtitle && (
+              <p className="text-lg md:text-xl text-white/80 mb-8 font-light fade-in-up delay-200">
+                {currentBanner.subtitle}
+              </p>
+            )}
+            <Button
+              onClick={scrollToGallery}
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-base px-8 py-6 rounded-lg fade-in-up delay-400 hover-lift"
+            >
+              Explorar galería
+              <ArrowDown className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Carousel Controls - Only show if more than 1 image */}
       {images.length > 1 && (

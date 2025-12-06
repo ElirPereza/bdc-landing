@@ -17,9 +17,11 @@ interface CatalogCardProps {
 
 function formatPrice(price: number | null | undefined): string {
   if (!price) return "Consultar precio"
-  return new Intl.NumberFormat("es-PE", {
+  return new Intl.NumberFormat("es-CO", {
     style: "currency",
-    currency: "PEN",
+    currency: "COP",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(price)
 }
 

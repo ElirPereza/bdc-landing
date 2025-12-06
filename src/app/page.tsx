@@ -29,8 +29,11 @@ export default async function Home() {
   const banners = bannersData.map((b) => ({
     id: b.id,
     image_url: b.image_url,
+    image_url_mobile: b.image_url_mobile,
     title: b.title,
     subtitle: b.subtitle,
+    show_title: b.show_title,
+    show_subtitle: b.show_subtitle,
   }))
 
   return (

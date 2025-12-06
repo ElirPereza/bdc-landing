@@ -157,9 +157,11 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
 
   const formatPrice = (price: number | null) => {
     if (!price) return "-"
-    return new Intl.NumberFormat("es-PE", {
+    return new Intl.NumberFormat("es-CO", {
       style: "currency",
-      currency: "PEN",
+      currency: "COP",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(price)
   }
 
@@ -216,7 +218,7 @@ export function MotocargueroTable({ initialData }: MotocargueroTableProps) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="price">Precio (S/.)</Label>
+                <Label htmlFor="price">Precio ($)</Label>
                 <Input
                   id="price"
                   type="number"
