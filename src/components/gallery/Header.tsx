@@ -51,7 +51,7 @@ export function Header() {
               alt="BDC Logo"
               width={120}
               height={120}
-              className="rounded-lg"
+              className="rounded-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28"
             />
           </Link>
 
@@ -95,7 +95,7 @@ export function Header() {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-border/50 pt-4">
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}

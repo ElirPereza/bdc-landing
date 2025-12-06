@@ -29,11 +29,11 @@ export function ProductCard({ image, name, description }: ProductCardProps) {
           }`}
         />
       </CardContent>
-      <CardFooter className="flex flex-col items-start p-5 space-y-2">
-        <h3 className="text-lg font-medium text-card-foreground group-hover:text-primary transition-colors">
+      <CardFooter className="flex flex-col items-start p-3 sm:p-4 lg:p-5 space-y-1 sm:space-y-2">
+        <h3 className="text-base sm:text-lg font-medium text-card-foreground group-hover:text-primary transition-colors line-clamp-2">
           {name}
         </h3>
-        <p className="text-sm text-muted-foreground line-clamp-2">
+        <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
           {description}
         </p>
       </CardFooter>

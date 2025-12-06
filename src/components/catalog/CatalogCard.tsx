@@ -49,12 +49,12 @@ export function CatalogCard({
           }`}
         />
       </CardContent>
-      <CardFooter className="flex flex-col items-start p-5 space-y-3">
+      <CardFooter className="flex flex-col items-start p-3 sm:p-4 lg:p-5 space-y-2 sm:space-y-3">
         <div className="w-full">
-          <h3 className="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
+          <h3 className="text-base sm:text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors line-clamp-2">
             {name}
           </h3>
-          <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+          <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 mt-1">
             {description}
           </p>
         </div>
@@ -62,23 +62,23 @@ export function CatalogCard({
         {specs && Object.keys(specs).length > 0 && (
           <div className="w-full space-y-1">
             {Object.entries(specs).slice(0, 3).map(([key, value]) => (
-              <div key={key} className="flex justify-between text-xs">
-                <span className="text-muted-foreground capitalize">{key}:</span>
-                <span className="text-foreground font-medium">{value}</span>
+              <div key={key} className="flex justify-between gap-2 text-xs sm:text-sm">
+                <span className="text-muted-foreground capitalize flex-shrink-0">{key}:</span>
+                <span className="text-foreground font-medium text-right truncate">{value}</span>
               </div>
             ))}
           </div>
         )}
 
         <div className="w-full pt-2 border-t border-border/50">
-          <p className="text-xl font-bold text-primary">
+          <p className="text-lg sm:text-xl font-bold text-primary">
             {formatPrice(price)}
           </p>
         </div>
 
         <Button
           onClick={handleWhatsAppClick}
-          className="w-full bg-green-600 hover:bg-green-700 text-white transition-all"
+          className="w-full bg-green-600 hover:bg-green-700 text-white transition-all text-sm sm:text-base py-2 sm:py-2.5"
         >
           <MessageCircle className="w-4 h-4 mr-2" />
           Consultar

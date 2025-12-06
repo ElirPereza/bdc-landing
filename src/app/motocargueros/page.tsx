@@ -18,32 +18,32 @@ export default async function MotocargueroPage() {
     <div className="min-h-screen">
       <Header />
       <main className="pt-20">
-        <section className="py-12">
+        <section className="py-8 sm:py-10 lg:py-12">
           <div className="container mx-auto px-4 lg:px-8">
             {/* Breadcrumb */}
             <Link
               href="/#productos"
-              className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-8"
+              className="inline-flex items-center text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors mb-6 sm:mb-8"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Volver al inicio
             </Link>
 
             {/* Header */}
-            <div className="text-center mb-12 fade-in-up">
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3 tracking-tight">
+            <div className="text-center mb-8 sm:mb-12 fade-in-up">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 tracking-tight">
                 Motocargueros
               </h1>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
                 Motocargueros de alta calidad para transporte de carga.
                 Potencia, durabilidad y eficiencia para tu negocio.
               </p>
-              <div className="w-16 h-0.5 bg-primary mx-auto mt-6" />
+              <div className="w-12 sm:w-16 h-0.5 bg-primary mx-auto mt-4 sm:mt-6" />
             </div>
 
             {/* Products Grid */}
             {motocargueros.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
                 {motocargueros.map((moto, index) => {
                   const specs = moto.specs as MotocargueroSpecs | null
                   return (

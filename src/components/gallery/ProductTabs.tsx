@@ -26,27 +26,27 @@ export function ProductTabs({ repuestos, motocargueros }: ProductTabsProps) {
   const catalogLabel = activeTab === "repuestos" ? "Ver todos los repuestos" : "Ver todos los motocargueros"
 
   return (
-    <section id="productos" className="py-20">
+    <section id="productos" className="py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-12 fade-in-up">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3 tracking-tight">
+        <div className="text-center mb-8 sm:mb-12 fade-in-up">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 tracking-tight">
             Nuestros Productos
           </h2>
-          <div className="w-16 h-0.5 bg-primary mx-auto mb-8" />
+          <div className="w-12 sm:w-16 h-0.5 bg-primary mx-auto mb-6 sm:mb-8" />
 
           {/* Tabs */}
-          <div className="flex justify-center gap-2">
+          <div className="flex justify-center gap-2 sm:gap-3">
             <Button
               variant={activeTab === "repuestos" ? "default" : "outline"}
               onClick={() => setActiveTab("repuestos")}
-              className="min-w-[140px] transition-all duration-300"
+              className="min-w-[120px] sm:min-w-[140px] text-sm sm:text-base transition-all duration-300"
             >
               Repuestos
             </Button>
             <Button
               variant={activeTab === "motocargueros" ? "default" : "outline"}
               onClick={() => setActiveTab("motocargueros")}
-              className="min-w-[140px] transition-all duration-300"
+              className="min-w-[120px] sm:min-w-[140px] text-sm sm:text-base transition-all duration-300"
             >
               Motocargueros
             </Button>
@@ -54,7 +54,7 @@ export function ProductTabs({ repuestos, motocargueros }: ProductTabsProps) {
         </div>
 
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
             {products.map((product, index) => (
               <div
                 key={product.id}

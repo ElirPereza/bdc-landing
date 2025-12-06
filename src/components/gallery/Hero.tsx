@@ -116,19 +116,19 @@ export function Hero({ banners = [] }: HeroProps) {
         <div className="relative z-10 container mx-auto px-4 lg:px-8">
           <div className="max-w-xl">
             {currentBanner?.show_title && currentBanner?.title && (
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight fade-in-up">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight fade-in-up">
                 {currentBanner.title}
               </h1>
             )}
             {currentBanner?.show_subtitle && currentBanner?.subtitle && (
-              <p className="text-lg md:text-xl text-white/80 mb-8 font-light fade-in-up delay-200">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 font-light fade-in-up delay-200">
                 {currentBanner.subtitle}
               </p>
             )}
             <Button
               onClick={scrollToGallery}
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-base px-8 py-6 rounded-lg fade-in-up delay-400 hover-lift"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-lg fade-in-up delay-400 hover-lift"
             >
               Explorar galería
               <ArrowDown className="ml-2 h-4 w-4" />
@@ -143,29 +143,29 @@ export function Hero({ banners = [] }: HeroProps) {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-all"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-black/30 hover:bg-black/50 active:bg-black/60 text-white transition-all"
             aria-label="Anterior"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-all"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-black/30 hover:bg-black/50 active:bg-black/60 text-white transition-all"
             aria-label="Siguiente"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
 
           {/* Dots Indicator */}
-          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-2 sm:gap-3">
             {images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
+                className={`h-2 sm:h-2.5 rounded-full transition-all ${
                   index === currentIndex
-                    ? "bg-white w-6"
-                    : "bg-white/50 hover:bg-white/70"
+                    ? "bg-white w-6 sm:w-8"
+                    : "bg-white/50 hover:bg-white/70 w-2 sm:w-2.5"
                 }`}
                 aria-label={`Ir a banner ${index + 1}`}
               />

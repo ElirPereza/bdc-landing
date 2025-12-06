@@ -10,9 +10,9 @@ const locations = [
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border py-12">
+    <footer className="bg-card border-t border-border py-8 sm:py-10 lg:py-12">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8">
           <div className="fade-in-up">
             <div className="flex items-center mb-4">
               <Image
