@@ -17,9 +17,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Image from "next/image"
 
@@ -64,26 +61,16 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
-              <a href="/dashboard">
-                <Image
-                  src="/assets/logo-bdc.png"
-                  alt="BDC Logo"
-                  width={24}
-                  height={24}
-                  className="rounded"
-                />
-                <span className="text-base font-semibold">BDC</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+      <SidebarHeader className="p-4">
+        <a href="/dashboard" className="flex justify-center">
+          <Image
+            src="/assets/logo-bdc.png"
+            alt="BDC Logo"
+            width={160}
+            height={80}
+            className="rounded-lg object-contain"
+          />
+        </a>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
