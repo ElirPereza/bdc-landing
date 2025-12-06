@@ -23,18 +23,8 @@ export function Hero({ banners = [] }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
-  // Use default banner if no banners from DB
-  const images = banners.length > 0 ? banners : [
-    {
-      id: "default",
-      image_url: "/assets/banner-1.jpg",
-      image_url_mobile: null,
-      title: "Somos #1 en Colombia",
-      subtitle: "Somos #1 en Colombia en la distribución de motocargueros y repuestos",
-      show_title: true,
-      show_subtitle: true
-    }
-  ]
+  // Use banners from DB only - no default fallback
+  const images = banners
 
   // Check if current banner should show any content (title, subtitle)
   const currentBanner = images[currentIndex]
@@ -81,7 +71,7 @@ export function Hero({ banners = [] }: HeroProps) {
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
       {/* Background Images */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-black">
         {images.map((banner, index) => (
           <div
             key={banner.id}

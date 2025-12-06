@@ -19,21 +19,7 @@ interface GalleryImage {
   name: string
 }
 
-const initialImages: GalleryImage[] = [
-  { id: 1, src: "/placeholder-parts-1.jpg", name: "parts-1.jpg" },
-  { id: 2, src: "/placeholder-parts-2.jpg", name: "parts-2.jpg" },
-  { id: 3, src: "/placeholder-parts-3.jpg", name: "parts-3.jpg" },
-  { id: 4, src: "/placeholder-parts-4.jpg", name: "parts-4.jpg" },
-  { id: 5, src: "/placeholder-parts-5.jpg", name: "parts-5.jpg" },
-  { id: 6, src: "/placeholder-parts-6.jpg", name: "parts-6.jpg" },
-  { id: 7, src: "/placeholder-bike-1.jpg", name: "bike-1.jpg" },
-  { id: 8, src: "/placeholder-bike-2.jpg", name: "bike-2.jpg" },
-  { id: 9, src: "/placeholder-bike-3.jpg", name: "bike-3.jpg" },
-  { id: 10, src: "/placeholder-bike-4.jpg", name: "bike-4.jpg" },
-  { id: 11, src: "/placeholder-bike-5.jpg", name: "bike-5.jpg" },
-  { id: 12, src: "/placeholder-bike-6.jpg", name: "bike-6.jpg" },
-  { id: 13, src: "/hero-workshop.jpg", name: "hero-workshop.jpg" },
-]
+const initialImages: GalleryImage[] = []
 
 export default function GalleryPage() {
   const [images, setImages] = useState<GalleryImage[]>(initialImages)
