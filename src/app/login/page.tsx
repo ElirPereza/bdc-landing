@@ -33,8 +33,10 @@ export default function LoginPage() {
       }
 
       toast.success("Inicio de sesión exitoso")
-      router.push("/dashboard")
       router.refresh()
+      // Small delay to ensure cookies are set before redirect
+      await new Promise(resolve => setTimeout(resolve, 100))
+      window.location.href = "/dashboard"
     } catch {
       toast.error("Error al iniciar sesión")
     } finally {
