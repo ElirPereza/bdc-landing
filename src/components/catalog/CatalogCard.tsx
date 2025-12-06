@@ -31,7 +31,7 @@ export function CatalogCard({
   description,
   price,
   specs,
-  whatsappNumber = "573217407700"
+  whatsappNumber = "573137732492"
 }: CatalogCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false)
 
